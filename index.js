@@ -27,11 +27,11 @@ const lib = require('./lib/feminitives');
 const make_feminitives = lib.make_feminitives;
 const FEM = lib.FEM;
 
-const bot = new Telegraf(process.env.BOT_TOKEN,
-  // {
-  //   telegram: { agent: proxyAgent }
-  // }
-);
+const bot = new Telegraf(process.env.BOT_TOKEN, {
+  telegram: {
+    agent: null,
+  }
+});
 bot.start((ctx) => ctx.reply(`
 При помощи этой небольшой программы,
 реализующей феминистическую логику, 
@@ -57,7 +57,8 @@ bot.on('text', (ctx) => {
   } else {
     feminitives = make_feminitives(word);
   }
-  ctx.reply(feminitives[1].join(" | ")
-    || "Это слово и так прекрасно. Оставим его как есть.");
+  const result = (feminitives && feminitives[1] && feminitives[1].join && feminitives[1].join(" | "))
+    || "Это слово и так прекрасно. Оставим его как есть.";
+  ctx.reply(result);
 });
 bot.launch();
