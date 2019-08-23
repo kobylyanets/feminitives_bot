@@ -16,12 +16,12 @@ expressApp.listen(port, () => {
 // heroku bug
 
 // For local debug
-// const ProxyAgent = require('proxy-agent');
-//
-// const proxyUri = `${process.env.PROXY_PROTOCOL}://${process.env.PROXY_LOGIN}:${
-//   process.env.PROXY_PSSWD
-//   }@${process.env.PROXY_HOST}:${process.env.PROXY_PORT}`;
-// const proxyAgent = new ProxyAgent(proxyUri);
+const ProxyAgent = require('proxy-agent');
+
+const proxyUri = `${process.env.PROXY_PROTOCOL}://${process.env.PROXY_LOGIN}:${
+  process.env.PROXY_PSSWD
+  }@${process.env.PROXY_HOST}:${process.env.PROXY_PORT}`;
+const proxyAgent = new ProxyAgent(proxyUri);
 
 const lib = require('./lib/feminitives');
 const make_feminitives = lib.make_feminitives;
@@ -29,7 +29,7 @@ const FEM = lib.FEM;
 
 const bot = new Telegraf(process.env.BOT_TOKEN, {
   telegram: {
-    agent: null,
+    agent: proxyAgent,
   }
 });
 bot.start((ctx) => ctx.reply(`
