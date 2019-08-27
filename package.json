@@ -4,8 +4,9 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "node index.js",
+    "start": "node --experimental-modules src/app.mjs",
     "dev": "node $NODE_DEBUG_OPTION index.js",
+    "watch": "nodemon --watch src -e .js,.mjs -x 'node $NODE_DEBUG_OPTION --experimental-modules src/app.mjs'",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "",
@@ -14,9 +15,13 @@
     "node": "10.15.0"
   },
   "dependencies": {
+    "axios": "^0.19.0",
     "dotenv": "^8.1.0",
-    "express": "^4.17.1",
+    "node-fetch": "^2.6.0",
     "proxy-agent": "^3.1.0",
     "telegraf": "^3.32.0"
+  },
+  "devDependencies": {
+    "nodemon": "^1.19.1"
   }
 }

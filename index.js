@@ -2,19 +2,6 @@ require('dotenv').config();
 
 const Telegraf = require('telegraf');
 
-// heroku bug https://github.com/telegraf/telegraf/issues/363#issuecomment-446361074
-const express = require("express");
-const expressApp = express();
-
-const port = process.env.PORT || 3000;
-expressApp.get('/', (req, res) => {
-  res.send('Hello World!')
-});
-expressApp.listen(port, () => {
-  console.log(`Listening on port ${port}`)
-});
-// heroku bug
-
 // For local debug
 const ProxyAgent = require('proxy-agent');
 
@@ -32,7 +19,7 @@ const bot = new Telegraf(process.env.BOT_TOKEN, {
     agent: proxyAgent,
   }
 });
-bot.start((ctx) => ctx.reply(`
+bot.start((ctx) => ctx.replyWithMarkdown(`
 При помощи этой небольшой программы,
 реализующей феминистическую логику, 
 вы сами можете создать феминитивы к любому слову.
