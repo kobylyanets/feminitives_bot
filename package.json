@@ -7,7 +7,7 @@
     "start": "node --experimental-modules src/app.mjs",
     "dev": "node $NODE_DEBUG_OPTION index.js",
     "watch": "nodemon --watch src -e .js,.mjs -x 'node $NODE_DEBUG_OPTION --experimental-modules src/app.mjs'",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "eslint --ext=js,mjs ."
   },
   "author": "",
   "license": "ISC",
