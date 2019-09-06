@@ -1,6 +1,10 @@
 import isEmpty from 'lodash.isempty';
 
 import { endings } from './endings';
+import { exceptions } from './exceptions';
+
+const UNDERSCORE_GAP = '_';
+const GENDER_GAP = '\u26A7';
 
 /**
  * Первый элемент списка - окончание (в виде регулярного выражения)
@@ -24,7 +28,7 @@ const offset = tuple => tuple[1];
  * @param ending
  * @returns {string}
  */
-const constructFeminitive = (stem, ending) => `${stem} \u26A7 ${ending}`;
+const constructFeminitive = (stem, ending) => `${stem} ${GENDER_GAP} ${ending}`;
 
 /**
  * Создание массива с феминитивами
@@ -32,15 +36,15 @@ const constructFeminitive = (stem, ending) => `${stem} \u26A7 ${ending}`;
  * @param word: String
  * @returns {*[]}
  */
-export const makeFeminitives = (word) => {
+export const makeFeminitives = word => {
   if (isEmpty(word) || word.length < 3) {
-    return [word];
+    return [];
   }
   const currentEnding = word.slice(-2); // Текущее окончание
-  const feminitives = [];             // Массив феминитивов
+  const feminitives = []; // Массив феминитивов
 
   Object.entries(endings).forEach(([femEnding, ends]) => {
-    ends.forEach((end) => {
+    ends.forEach(end => {
       if (endingRegExp(end).test(currentEnding)) {
         const stem = offset(end) === 0 ? word : word.slice(0, -offset(end));
         feminitives.push(constructFeminitive(stem, femEnding));
@@ -48,4 +52,14 @@ export const makeFeminitives = (word) => {
     });
   });
   return feminitives;
+};
+
+/**
+ *  Проверка на исключение
+ */
+export const getException = word => {
+  if (Object.keys(exceptions).includes(word)) {
+    return exceptions[word];
+  }
+  return null;
 };

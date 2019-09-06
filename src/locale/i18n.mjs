@@ -6,5 +6,8 @@ export const i18n = {
   HELP_TEXT: help,
   femMessage: {
     EMPTY_INPUT_TEXT: 'Введите слово!!!',
+    POSSIBLE_OPTION: 'Возможные варианты',
+    DEFINITION: 'Определение',
+    NO_FEMINITIVE_MESSAGE: 'Это слово и так прекрасно. Оставим его как есть.',
   },
 };

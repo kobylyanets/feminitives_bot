@@ -1,4 +1,4 @@
-import {} from "dotenv/config";
-import { setupBot } from "./bot";
+import {} from 'dotenv/config';
+import { setupBot } from './bot';
 
 setupBot();
