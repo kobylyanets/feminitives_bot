@@ -12,7 +12,7 @@ const randomWord = wordlist =>
 
 const capitalLetterWord = word => {
   if (!isEmpty(word)) {
-    return word.replace(/(.)/, s => s.toUpperCase());
+    return word.replace(/(.)/, s => s.toUpperCase()).replace('\\', '');
   }
   return '';
 };

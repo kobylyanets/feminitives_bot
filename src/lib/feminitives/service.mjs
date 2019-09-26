@@ -2,9 +2,10 @@ import isEmpty from 'lodash.isempty';
 
 import { endings } from './endings';
 import { exceptions } from './exceptions';
+import { words } from './words';
 
-const UNDERSCORE_GAP = '_';
-const GENDER_GAP = '\u26A7';
+const UNDERSCORE_GAP = '\\_';
+const GENDER_GAP = ' \u26A7 ';
 
 /**
  * Первый элемент списка - окончание (в виде регулярного выражения)
@@ -29,7 +30,7 @@ const offset = tuple => tuple[1];
  * @param gap
  * @returns {string}
  */
-const constructFeminitive = (stem, ending, gap = GENDER_GAP) => `${stem} ${gap} ${ending}`;
+const constructFeminitive = (stem, ending, gap = UNDERSCORE_GAP) => `${stem}${gap}${ending}`;
 
 /**
  * Создание массива с феминитивами
@@ -63,4 +64,19 @@ export const getException = word => {
     return exceptions[word];
   }
   return null;
+};
+
+/**
+ * Замена мужских слов на женские в строке.
+ * @param str
+ * @return {*}
+ */
+export const convert = str => {
+  let result = str;
+  Object.entries(words).forEach(([menWord, femWord]) => {
+    result = result
+        .replace(new RegExp(`(^|\\s)+${menWord}`, 'ig'), `$1${femWord}`)
+        .replace(/(.)/, s => s.toUpperCase());
+  });
+  return result;
 };
