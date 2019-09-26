@@ -2,6 +2,7 @@ import isEmpty from 'lodash.isempty';
 
 import { getException, makeFeminitives } from '../lib/feminitives/service';
 import { i18n } from '../locale/i18n';
+import { getDefinition } from './wikiService';
 
 /**
  * Случайный элемент списка
@@ -46,14 +47,26 @@ const getEmptyFeminitivesMessage = word => `
 _${i18n.femMessage.NO_FEMINITIVE_MESSAGE}_
 `;
 
-const getFeminitivesMessage = feminitives => `
+const getDefinitionMessage = definition => `
+_${i18n.femMessage.DEFINITION}:_
+${definition}
+`;
+
+const getFeminitivesMessage = async (feminitives, word) => {
+  const message = `
 ${getMainFeminitive(feminitives)}
 
 _${i18n.femMessage.POSSIBLE_OPTION}:_
 ${getFeminitivesList(feminitives)}
 `;
+  const definition = await getDefinition(word);
+  if (!isEmpty(definition)) {
+    return `${message} ${getDefinitionMessage(definition)}`;
+  }
+  return message;
+};
 
-export const constructFeminitiveMessage = input => {
+export const constructFeminitiveMessage = async input => {
   const word = getFirstInputWord(input);
   if (isEmpty(word)) {
     return i18n.femMessage.EMPTY_INPUT_TEXT;
@@ -66,5 +79,5 @@ export const constructFeminitiveMessage = input => {
   if (isEmpty(feminitives)) {
     return getEmptyFeminitivesMessage(word);
   }
-  return getFeminitivesMessage(feminitives);
+  return getFeminitivesMessage(feminitives, word);
 };

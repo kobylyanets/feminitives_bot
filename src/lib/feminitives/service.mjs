@@ -26,9 +26,10 @@ const offset = tuple => tuple[1];
  * Конструирование феминитива с gender_gap
  * @param stem
  * @param ending
+ * @param gap
  * @returns {string}
  */
-const constructFeminitive = (stem, ending) => `${stem} ${GENDER_GAP} ${ending}`;
+const constructFeminitive = (stem, ending, gap = GENDER_GAP) => `${stem} ${gap} ${ending}`;
 
 /**
  * Создание массива с феминитивами
