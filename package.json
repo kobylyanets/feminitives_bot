@@ -21,12 +21,12 @@
     "node-fetch": "^2.6.0",
     "proxy-agent": "^3.1.0",
     "telegraf": "^3.32.0",
-    "prettier": "^1.18.2"
+    "prettier": "^2.0.4"
   },
   "devDependencies": {
     "eslint": "^6.8.0",
-    "eslint-config-airbnb-base": "^11.3.2",
-    "eslint-plugin-import": "^2.7.0",
-    "nodemon": "^1.19.1"
+    "eslint-config-airbnb-base": "^14.1.0",
+    "eslint-plugin-import": "^2.20.2",
+    "nodemon": "^2.0.3"
   }
 }
