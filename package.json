@@ -2,21 +2,31 @@
   "name": "feminitives_bot",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
+  "main": "src/app.mjs",
+  "type": "module",
   "scripts": {
-    "start": "node index.js",
-    "dev": "node $NODE_DEBUG_OPTION index.js",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "node --experimental-modules --es-module-specifier-resolution=node src/app.mjs",
+    "dev": "node $NODE_DEBUG_OPTION --experimental-modules --es-module-specifier-resolution=node src/app.mjs",
+    "watch": "nodemon --watch src -e .js,.mjs -x 'node $NODE_DEBUG_OPTION --es-module-specifier-resolution=node src/app.mjs'",
+    "test": "eslint --ext=js,mjs ."
   },
   "author": "",
   "license": "ISC",
   "engines": {
-    "node": "10.15.0"
+    "node": "12.16.1"
   },
   "dependencies": {
-    "dotenv": "^8.1.0",
-    "express": "^4.17.1",
+    "dotenv": "^8.2.0",
+    "lodash.isempty": "^4.4.0",
+    "node-fetch": "^2.6.0",
     "proxy-agent": "^3.1.0",
-    "telegraf": "^3.32.0"
+    "telegraf": "^3.32.0",
+    "prettier": "^1.18.2"
+  },
+  "devDependencies": {
+    "eslint": "^3.19.0",
+    "eslint-config-airbnb-base": "^11.3.2",
+    "eslint-plugin-import": "^2.7.0",
+    "nodemon": "^1.19.1"
   }
 }

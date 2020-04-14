@@ -1,0 +1,40 @@
+{
+  "extends": "airbnb-base",
+  "overrides": {
+    "files": "*.mjs",
+    "parserOptions": {
+      "sourceType": "module"
+    },
+    "rules": {
+      "node/no-unsupported-features": [
+        "error",
+        {
+          "version": 10,
+          "ignores": ["modules"]
+        }
+      ]
+    }
+  },
+  "plugins": ["import"],
+  "rules": {
+    "no-console": "off",
+    "no-restricted-syntax": "off",
+    "no-await-in-loop": "off",
+    "arrow-parens": ["error", "as-needed"],
+    "import/extensions": [
+      "error",
+      "always",
+      {
+        "js": "never",
+        "mjs": "never",
+        "json": "never"
+      }
+    ],
+    "import/prefer-default-export": "off"
+  },
+  "settings": {
+    "import/resolver": {
+      "node": { "extensions": [".js", ".mjs", ".json"] }
+    }
+  }
+}

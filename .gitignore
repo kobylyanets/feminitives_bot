@@ -1,3 +1,5 @@
 .Idea/
+.idea/
 .env
 node_modules/
+app.yaml
